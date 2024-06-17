@@ -1,7 +1,7 @@
 import java.util.*;
 
-public class GND implements Grafo {
-    private Map<Integer, List<Pair<Integer, Integer>>> listaDeAdyacencia;
+public class GND implements G {
+    private Map<Integer, List<Par<Integer, Integer>>> listaDeAdyacencia;
 
     public GND() {
         this.listaDeAdyacencia = new HashMap<>();
@@ -18,29 +18,29 @@ public class GND implements Grafo {
     public void addEdge(int vertex1, int vertex2, int peso) {
         listaDeAdyacencia.putIfAbsent(vertex1, new ArrayList<>());
         listaDeAdyacencia.putIfAbsent(vertex2, new ArrayList<>());
-        listaDeAdyacencia.get(vertex1).add(new Pair<>(vertex2, peso));
-        listaDeAdyacencia.get(vertex2).add(new Pair<>(vertex1, peso));
+        listaDeAdyacencia.get(vertex1).add(new Par<>(vertex2, peso));
+        listaDeAdyacencia.get(vertex2).add(new Par<>(vertex1, peso));
     }
 
     @Override
     public List<Integer> getNeighbors(int vertex) {
         List<Integer> neighbors = new ArrayList<>();
-        for (Pair<Integer, Integer> pair : listaDeAdyacencia.getOrDefault(vertex, new ArrayList<>())) {
+        for (Par<Integer, Integer> pair : listaDeAdyacencia.getOrDefault(vertex, new ArrayList<>())) {
             neighbors.add(pair.getKey());
         }
         return neighbors;
     }
 
     @Override
-    public List<Pair<Integer, Integer>> getWeightedNeighbors(int vertex) {
+    public List<Par<Integer, Integer>> getWeightedNeighbors(int vertex) {
         return listaDeAdyacencia.getOrDefault(vertex, new ArrayList<>());
     }
 
     @Override
     public void printGraph() {
-        for (Map.Entry<Integer, List<Pair<Integer, Integer>>> entry : listaDeAdyacencia.entrySet()) {
+        for (Map.Entry<Integer, List<Par<Integer, Integer>>> entry : listaDeAdyacencia.entrySet()) {
             System.out.print("Vértice " + entry.getKey() + ": ");
-            for (Pair<Integer, Integer> neighbor : entry.getValue()) {
+            for (Par<Integer, Integer> neighbor : entry.getValue()) {
                 System.out.print(neighbor + " ");
             }
             System.out.println();
@@ -55,8 +55,8 @@ public class GND implements Grafo {
 
     @Override
     public void removeEdge(int vertex1, int vertex2) {
-        List<Pair<Integer, Integer>> eV1 = listaDeAdyacencia.get(vertex1);
-        List<Pair<Integer, Integer>> eV2 = listaDeAdyacencia.get(vertex2);
+        List<Par<Integer, Integer>> eV1 = listaDeAdyacencia.get(vertex1);
+        List<Par<Integer, Integer>> eV2 = listaDeAdyacencia.get(vertex2);
         if (eV1 != null) eV1.removeIf(pair -> pair.getKey() == vertex2);
         if (eV2 != null) eV2.removeIf(pair -> pair.getKey() == vertex1);
     }

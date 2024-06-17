@@ -1,10 +1,10 @@
 
 
-public class Pair<K, V> {
+public class Par<K, V> {
     private K key;
     private V value;
 
-    public Pair(K key, V value) {
+    public Par(K key, V value) {
         this.key = key;
         this.value = value;
     }
@@ -27,7 +27,7 @@ public class Pair<K, V> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Pair<?, ?> pair = (Pair<?, ?>) o;
+        Par<?, ?> pair = (Par<?, ?>) o;
 
         if (!key.equals(pair.key)) return false;
         return value.equals(pair.value);
